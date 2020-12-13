@@ -1,7 +1,5 @@
 package pl.firmaBudo.equipBase.dao.entity;
 
-import java.time.LocalDate;
-
 public class PowerTool {
 
     private Long id;
