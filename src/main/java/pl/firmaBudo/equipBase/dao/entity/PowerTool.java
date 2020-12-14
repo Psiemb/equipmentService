@@ -65,6 +65,7 @@ public class PowerTool {
     @Override
     public int hashCode() {
         return Objects.hash(id, type, companyName, priceOfBuying, productionYear);
+
     }
 
     @Override
