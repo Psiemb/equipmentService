@@ -1,5 +1,5 @@
 package pl.firmaBudo.equipBase.dao.entity;
 
 public enum ContainerType {
-    PRACOWNICZY, BIUROWY, SANITARNY, MAGAZYN
+    EMPLOYEE, OFFICE, SANITARY, STORAGE
 }

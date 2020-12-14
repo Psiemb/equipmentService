@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Excavator {
 
     private Long id;
-    private String excavatorType;
+    private String type;
     private double purchasePrice;
     private int productionDate;
 
@@ -17,12 +17,12 @@ public class Excavator {
         this.id = id;
     }
 
-    public String getExcavatorType() {
-        return excavatorType;
+    public String getType() {
+        return type;
     }
 
-    public void setExcavatorType(String excavatorType) {
-        this.excavatorType = excavatorType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getPurchasePrice() {
@@ -49,19 +49,19 @@ public class Excavator {
         return Double.compare(excavator.purchasePrice, purchasePrice) == 0 &&
                 productionDate == excavator.productionDate &&
                 Objects.equals(id, excavator.id) &&
-                Objects.equals(excavatorType, excavator.excavatorType);
+                Objects.equals(type, excavator.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, excavatorType, purchasePrice, productionDate);
+        return Objects.hash(id, type, purchasePrice, productionDate);
     }
 
     @Override
     public String toString() {
         return "Excavator{" +
                 "id=" + id +
-                ", excavatorType='" + excavatorType + '\'' +
+                ", excavatorType='" + type + '\'' +
                 ", purchasePrice=" + purchasePrice +
                 ", productionDate=" + productionDate +
                 '}';
