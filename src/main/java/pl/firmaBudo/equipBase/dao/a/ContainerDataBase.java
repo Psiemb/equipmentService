@@ -31,6 +31,13 @@ public class ContainerDataBase {
                 .orElse(null);
     }
 
+    public Container getByProductionYear(int productionYear) {
+        return containers.stream()
+                .filter(container -> container.getProductionYear() == productionYear)
+                .findFirst()
+                .orElse(null);
+    }
+
     public Container addContainer(Container container) {
         this.containers.add(container);
         return container;
