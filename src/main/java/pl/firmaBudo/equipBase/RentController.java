@@ -1,7 +1,6 @@
 package pl.firmaBudo.equipBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.firmaBudo.equipBase.dao.a.ContainerDataBase;
@@ -16,28 +15,28 @@ public class RentController {
     @Autowired
     private ContainerDataBase containerDataBase;
 
-    @GetMapping("/v1/rent/container/id")
+    @GetMapping("/v1/rent/container")
     public ResponseEntity<Container> getById(@RequestParam long id) {
         return ResponseEntity.ok(containerDataBase.getById(id));
     }
 
     @GetMapping("/v1/rent/container")
     public ResponseEntity<List<Container>> getAllContainers() {
-        return ResponseEntity.status(HttpStatus.CREATED).body(containerDataBase.getAllContainers());
+        return ResponseEntity.ok(containerDataBase.getAllContainers());
     }
-    @GetMapping("/v1/rent/container/productionYear")
-    public  ResponseEntity<Container> getByProductionYear(@RequestParam int productionYear){
+
+    @GetMapping("/v1/rent/container")
+    public ResponseEntity<Container> getByProductionYear(@RequestParam int productionYear) {
         return ResponseEntity.ok(containerDataBase.getByProductionYear(productionYear));
     }
 
-    @GetMapping("/v1/rent/container/type")
+    @GetMapping("/v1/rent/container")
     public ResponseEntity<Container> getByType(@RequestParam ContainerType containerType) {
         return ResponseEntity.ok(containerDataBase.getByType(containerType));
     }
 
     @PostMapping("/v1/rent/container")
     public ResponseEntity<Container> addContainer(@RequestBody Container container) {
-//       return containerDataBase.addContainer(container); Czy taka wersja jest też OK?
         return ResponseEntity.ok(containerDataBase.addContainer(container));
     }
 

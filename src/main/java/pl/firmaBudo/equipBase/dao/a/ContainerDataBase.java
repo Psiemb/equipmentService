@@ -10,7 +10,6 @@ import java.util.List;
 @Component
 public class ContainerDataBase {
 
-
     private List<Container> containers = new ArrayList<>();
 
     public Container getById(long id) {
