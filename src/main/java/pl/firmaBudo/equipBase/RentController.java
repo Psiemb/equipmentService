@@ -1,69 +1,47 @@
 package pl.firmaBudo.equipBase;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.firmaBudo.equipBase.dao.a.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.entity.Container;
-import pl.firmaBudo.equipBase.dao.entity.Excavator;
-import pl.firmaBudo.equipBase.dao.entity.PowerTool;
+import pl.firmaBudo.equipBase.dao.entity.ContainerType;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("v1/rent")
 public class RentController {
 
+    @Autowired
+    private ContainerDataBase containerDataBase;
 
-    @GetMapping("/container")
-    public Container getContainer(Container container) {
-        return container;
+    @GetMapping("/v1/rent/container")
+    public ResponseEntity<Container> getById(@RequestParam long id) {
+        return ResponseEntity.ok(containerDataBase.getById(id));
     }
 
-    @GetMapping("/excavator")
-    public Excavator getExcavator(Excavator excavator) {
-        return excavator;
+    @GetMapping("/v1/rent/container")
+    public ResponseEntity<List<Container>> getAllContainers() {
+        return ResponseEntity.ok(containerDataBase.getAllContainers());
     }
 
-    @GetMapping("powerTool")
-    public PowerTool getPowerTool(PowerTool powerTool) {
-        return powerTool;
+    @GetMapping("/v1/rent/container")
+    public ResponseEntity<Container> getByProductionYear(@RequestParam int productionYear) {
+        return ResponseEntity.ok(containerDataBase.getByProductionYear(productionYear));
     }
 
-    @PostMapping("/container")
-    public void addContainer(Container container) {
+    @GetMapping("/v1/rent/container")
+    public ResponseEntity<Container> getByType(@RequestParam ContainerType containerType) {
+        return ResponseEntity.ok(containerDataBase.getByType(containerType));
     }
 
-    @PostMapping("/excavator")
-    public void addExcavator(Excavator excavator) {
+    @PostMapping("/v1/rent/container")
+    public ResponseEntity<Container> addContainer(@RequestBody Container container) {
+        return ResponseEntity.ok(containerDataBase.addContainer(container));
     }
 
-    @PostMapping("powerTool")
-    public void addPowerTool(PowerTool powerTool) {
+    @DeleteMapping("/v1/rent/container")
+    public void deleteContainer(@RequestParam long id) {
+        containerDataBase.deleteById(id);
     }
-
-    @DeleteMapping("/container")
-    public void deleteContainer(Container container) {
-
-    }
-
-    @DeleteMapping("/excavator")
-    public void deleteExcavator(Excavator excavator) {
-
-    }
-
-    @DeleteMapping("powerTool")
-    public void deletePowerTool(PowerTool powerTool) {
-    }
-
-    @PutMapping("/container")
-    public void updateContainer(Container container) {
-
-    }
-
-    @PutMapping("/excavator")
-    public void updateExcavator(Excavator excavator){
-
-    }
-    @PutMapping("powerTool")
-    public void updatePowerTool(PowerTool powerTool){
-
-    }
-
-
 }
