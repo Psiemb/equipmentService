@@ -11,20 +11,13 @@ public class PowerToolDataBase {
 
     private List<PowerTool> powerTools = new ArrayList<>();
 
-    public PowerTool getById(Long id) {
-        return powerTools.stream()
-                .filter(powerTool -> powerTool.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
-
     public List<PowerTool> getAll() {
         return this.powerTools;
     }
 
-    public PowerTool getByType(String type) {
+    public PowerTool getById(long id) {
         return powerTools.stream()
-                .filter(powerTool -> powerTool.getType() == type)
+                .filter(powerTool -> powerTool.getId() == id)
                 .findFirst()
                 .orElse(null);
     }
@@ -32,6 +25,13 @@ public class PowerToolDataBase {
     public PowerTool getByProductionYear(int productionYear) {
         return powerTools.stream()
                 .filter(powerTool -> powerTool.getPriceOfBuying() == productionYear)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public PowerTool getByType(String type) {
+        return powerTools.stream()
+                .filter(powerTool -> powerTool.getType() == type)
                 .findFirst()
                 .orElse(null);
     }
