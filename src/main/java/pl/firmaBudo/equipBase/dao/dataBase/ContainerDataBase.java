@@ -1,4 +1,4 @@
-package pl.firmaBudo.equipBase.dao.a;
+package pl.firmaBudo.equipBase.dao.dataBase;
 
 import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.dao.entity.Container;
