@@ -9,6 +9,7 @@ import java.util.List;
 @Component
 public class PowerToolDataBase {
 
+    private Iterable<PowerTool> powerToolss;
     private List<PowerTool> powerTools = new ArrayList<>();
 
     public List<PowerTool> getAll() {
