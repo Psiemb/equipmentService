@@ -1,4 +1,4 @@
-package pl.firmaBudo.equipBase.dao.a;
+package pl.firmaBudo.equipBase.dao.dataBase;
 
 import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.dao.entity.Container;
@@ -19,20 +19,20 @@ public class ContainerDataBase {
                 .orElse(null);
     }
 
-    public List<Container> getAllContainers() {
+    public List<Container> getAll() {
         return this.containers;
-    }
-
-    public Container getByType(ContainerType type) {
-        return containers.stream()
-                .filter(container -> container.getType() == type)
-                .findFirst()
-                .orElse(null);
     }
 
     public Container getByProductionYear(int productionYear) {
         return containers.stream()
                 .filter(container -> container.getProductionYear() == productionYear)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Container getByType(ContainerType type) {
+        return containers.stream()
+                .filter(container -> container.getType() == type)
                 .findFirst()
                 .orElse(null);
     }
