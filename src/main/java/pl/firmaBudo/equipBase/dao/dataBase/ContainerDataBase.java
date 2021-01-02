@@ -6,44 +6,39 @@ import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ContainerDataBase {
 
-    private List<Container> containers = new ArrayList<>();
-
-    public Container getById(long id) {
-        return containers.stream()
-                .filter(container -> container.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
+    private List<Container> containers = initialization();
 
     public List<Container> getAll() {
-        return this.containers;
-    }
-
-    public Container getByProductionYear(int productionYear) {
         return containers.stream()
-                .filter(container -> container.getProductionYear() == productionYear)
-                .findFirst()
-                .orElse(null);
+                .filter(container -> !container.isRented())
+                .collect(Collectors.toList());
     }
 
-    public Container getByType(ContainerType type) {
+    public List<Container> getByType(String type) {
         return containers.stream()
-                .filter(container -> container.getType() == type)
-                .findFirst()
-                .orElse(null);
+                .filter(container -> container.getType().name().equals(type))
+                .filter(container -> !container.isRented())
+                .collect(Collectors.toList());
     }
 
-    public Container addContainer(Container container) {
-        this.containers.add(container);
-        return container;
-    }
+    private List<Container> initialization() {
+        List<Container> result = new ArrayList<>();
+        result.add(new Container(15, ContainerType.EMPLOYEE));
+        result.add(new Container(10, ContainerType.EMPLOYEE));
+        result.add(new Container(18, ContainerType.EMPLOYEE));
+        result.add(new Container(5, ContainerType.SANITARY));
+        result.add(new Container(5, ContainerType.SANITARY));
+        result.add(new Container(18, ContainerType.STORAGE));
+        result.add(new Container(18, ContainerType.STORAGE));
+        result.add(new Container(18, ContainerType.STORAGE));
+        result.add(new Container(5, ContainerType.OFFICE));
+        result.add(new Container(8, ContainerType.OFFICE));
 
-    public void deleteById(long id) {
-        containers.removeIf(container -> container.getId() == id);
+        return result;
     }
-
 }

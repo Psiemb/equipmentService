@@ -5,77 +5,74 @@ import java.util.Objects;
 
 public class Container {
 
+    private static long idCount;
     private long id;
-    private int maxQuantityOfWorkersPerContainer;
+    private int workerCapacity;
     private ContainerType type;
-    private double purchasePrice;
-    private int productionYear;
+    private boolean rented;
+
+    public Container(int workerCapacity, ContainerType type) {
+        this.id = idCount++;
+        this.workerCapacity = workerCapacity;
+        this.type = type;
+    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Container setId(long id) {
         this.id = id;
+        return this;
     }
 
-    public int getMaxQuantityOfWorkersPerContainer() {
-        return maxQuantityOfWorkersPerContainer;
+    public int getWorkerCapacity() {
+        return workerCapacity;
     }
 
-    public void setMaxQuantityOfWorkersPerContainer(int maxQuantityOfWorkersPerContainer) {
-        this.maxQuantityOfWorkersPerContainer = maxQuantityOfWorkersPerContainer;
+    public Container setWorkerCapacity(int workerCapacity) {
+        this.workerCapacity = workerCapacity;
+        return this;
     }
 
     public ContainerType getType() {
         return type;
     }
 
-    public void setType(ContainerType type) {
+    public Container setType(ContainerType type) {
         this.type = type;
+        return this;
     }
 
-    public double getPurchasePrice() {
-        return purchasePrice;
+    public boolean isRented() {
+        return rented;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
+    public Container setRented(boolean rented) {
+        this.rented = rented;
+        return this;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Container)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Container container = (Container) o;
-        return id == container.id &&
-                maxQuantityOfWorkersPerContainer == container.maxQuantityOfWorkersPerContainer &&
-                Double.compare(container.purchasePrice, purchasePrice) == 0 &&
-                productionYear == container.productionYear &&
-                type == container.type;
+        return id == container.id && workerCapacity == container.workerCapacity && rented == container.rented && type == container.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, maxQuantityOfWorkersPerContainer, type, purchasePrice, productionYear);
+        return Objects.hash(id, workerCapacity, type, rented);
     }
 
     @Override
     public String toString() {
         return "Container{" +
                 "id=" + id +
-                ", maxQuantityOfWorkerPerContainer=" + maxQuantityOfWorkersPerContainer +
+                ", workerCapacity=" + workerCapacity +
                 ", type=" + type +
-                ", purchasePrice=" + purchasePrice +
-                ", productionYear=" + productionYear +
+                ", rented=" + rented +
                 '}';
     }
 }

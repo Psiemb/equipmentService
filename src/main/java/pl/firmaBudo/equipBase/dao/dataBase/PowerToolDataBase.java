@@ -32,7 +32,7 @@ public class PowerToolDataBase {
 
     public PowerTool getByType(String type) {
         return powerTools.stream()
-                .filter(powerTool -> powerTool.getType() == type)
+                .filter(powerTool -> powerTool.getType().equals(type))
                 .findFirst()
                 .orElse(null);
     }
@@ -43,7 +43,7 @@ public class PowerToolDataBase {
     }
 
     public void deletePowerTool(Long id) {
-        powerTools.removeIf(powerTool -> powerTool.getId() == id);
+        powerTools.removeIf(powerTool -> powerTool.getId().equals(id));
     }
 
 
