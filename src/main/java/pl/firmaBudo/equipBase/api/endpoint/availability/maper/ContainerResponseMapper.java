@@ -2,8 +2,9 @@ package pl.firmaBudo.equipBase.api.endpoint.availability.maper;
 
 import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
-import pl.firmaBudo.equipBase.dao.entity.Container;
+import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
 import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.List;
@@ -13,15 +14,15 @@ import java.util.stream.Collectors;
 @Component
 public class ContainerResponseMapper {
 
-    public ContainerResponse mapToResponse(List<Container> containers) {
+    public ContainerResponse mapToResponse(List<ContainerEntity> containerEntities) {
 //        List<AvailabilityContainer> availabilityContainers = containers.stream()
 //                .collect(Collectors.groupingBy(Container::getType, Collectors.counting()))
 //                .entrySet().stream()
 //                .map(e -> new AvailabilityContainer(e.getKey(), e.getValue()))
 //                .collect(Collectors.toList());
 
-        Map<ContainerType, Long> map = containers.stream()
-                .collect(Collectors.groupingBy(Container::getType, Collectors.counting()));
+        Map<ContainerType, Long> map = containerEntities.stream()
+                .collect(Collectors.groupingBy(ContainerEntity::getType, Collectors.counting()));
 
         List<AvailabilityContainer> availabilityContainers = map.entrySet().stream()
                 .map(e -> new AvailabilityContainer(e.getKey(), e.getValue()))
@@ -30,5 +31,19 @@ public class ContainerResponseMapper {
         return new ContainerResponse(availabilityContainers);
     }
 
+    public List<CheckContainerResponse> mapToResponseByType(List<ContainerEntity> byType) {
+        return byType.stream()
+                .map(this::mapTyCheckContainer)
+                .collect(Collectors.toList());
+    }
+
+    private CheckContainerResponse mapTyCheckContainer(ContainerEntity containerEntity) {
+        CheckContainerResponse checkContainerResponse = new CheckContainerResponse();
+        checkContainerResponse.setId(containerEntity.getId());
+        checkContainerResponse.setType(containerEntity.getType());
+        checkContainerResponse.setWorkerCapacity(containerEntity.getWorkerCapacity());
+
+        return checkContainerResponse;
+    }
 }
  

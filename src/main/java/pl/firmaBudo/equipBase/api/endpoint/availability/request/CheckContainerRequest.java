@@ -2,7 +2,7 @@ package pl.firmaBudo.equipBase.api.endpoint.availability.request;
 
 import java.util.Objects;
 
-public class CheckContainerQuery {
+public class CheckContainerRequest {
 
     private CheckContainerType checkBy;
     private String value;
@@ -11,7 +11,7 @@ public class CheckContainerQuery {
         return checkBy;
     }
 
-    public CheckContainerQuery setCheckBy(CheckContainerType checkBy) {
+    public CheckContainerRequest setCheckBy(CheckContainerType checkBy) {
         this.checkBy = checkBy;
         return this;
     }
@@ -20,7 +20,7 @@ public class CheckContainerQuery {
         return value;
     }
 
-    public CheckContainerQuery setValue(String value) {
+    public CheckContainerRequest setValue(String value) {
         this.value = value;
         return this;
     }
@@ -29,7 +29,7 @@ public class CheckContainerQuery {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CheckContainerQuery that = (CheckContainerQuery) o;
+        CheckContainerRequest that = (CheckContainerRequest) o;
         return checkBy == that.checkBy && Objects.equals(value, that.value);
     }
 

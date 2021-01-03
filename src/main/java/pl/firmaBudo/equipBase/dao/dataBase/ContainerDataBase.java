@@ -1,7 +1,7 @@
 package pl.firmaBudo.equipBase.dao.dataBase;
 
 import org.springframework.stereotype.Component;
-import pl.firmaBudo.equipBase.dao.entity.Container;
+import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
 import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.ArrayList;
@@ -11,33 +11,34 @@ import java.util.stream.Collectors;
 @Component
 public class ContainerDataBase {
 
-    private List<Container> containers = initialization();
+    private List<ContainerEntity> containerEntities = initialization();
 
-    public List<Container> getAll() {
-        return containers.stream()
+    public List<ContainerEntity> getAll() {
+        return containerEntities.stream()
                 .filter(container -> !container.isRented())
                 .collect(Collectors.toList());
     }
 
-    public List<Container> getByType(String type) {
-        return containers.stream()
-                .filter(container -> container.getType().name().equals(type))
+    public List<ContainerEntity> getByType(ContainerType type) {
+        return containerEntities.stream()
+                .filter(container -> container.getType().equals(type))
                 .filter(container -> !container.isRented())
                 .collect(Collectors.toList());
     }
 
-    private List<Container> initialization() {
-        List<Container> result = new ArrayList<>();
-        result.add(new Container(15, ContainerType.EMPLOYEE));
-        result.add(new Container(10, ContainerType.EMPLOYEE));
-        result.add(new Container(18, ContainerType.EMPLOYEE));
-        result.add(new Container(5, ContainerType.SANITARY));
-        result.add(new Container(5, ContainerType.SANITARY));
-        result.add(new Container(18, ContainerType.STORAGE));
-        result.add(new Container(18, ContainerType.STORAGE));
-        result.add(new Container(18, ContainerType.STORAGE));
-        result.add(new Container(5, ContainerType.OFFICE));
-        result.add(new Container(8, ContainerType.OFFICE));
+    private List<ContainerEntity> initialization() {
+        List<ContainerEntity> result = new ArrayList<>();
+        result.add(new ContainerEntity(15, ContainerType.EMPLOYEE));
+        result.add(new ContainerEntity(15, ContainerType.EMPLOYEE, true));
+        result.add(new ContainerEntity(10, ContainerType.EMPLOYEE));
+        result.add(new ContainerEntity(18, ContainerType.EMPLOYEE));
+        result.add(new ContainerEntity(5, ContainerType.SANITARY));
+        result.add(new ContainerEntity(5, ContainerType.SANITARY));
+        result.add(new ContainerEntity(18, ContainerType.STORAGE));
+        result.add(new ContainerEntity(18, ContainerType.STORAGE));
+        result.add(new ContainerEntity(18, ContainerType.STORAGE));
+        result.add(new ContainerEntity(5, ContainerType.OFFICE));
+        result.add(new ContainerEntity(8, ContainerType.OFFICE));
 
         return result;
     }

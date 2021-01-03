@@ -3,7 +3,7 @@ package pl.firmaBudo.equipBase.api.endpoint.availability.maper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
-import pl.firmaBudo.equipBase.dao.entity.Container;
+import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
 import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.ArrayList;
@@ -23,20 +23,20 @@ class ContainerResponseMapperTest {
     @Test
     void shouldGroupingByContainerType() {
         // given
-        List<Container> containers = new ArrayList<>();
-        containers.add(new Container(5, ContainerType.EMPLOYEE));
-        containers.add(new Container(5, ContainerType.EMPLOYEE));
-        containers.add(new Container(5, ContainerType.STORAGE));
-        containers.add(new Container(5, ContainerType.OFFICE));
-        containers.add(new Container(5, ContainerType.OFFICE));
-        containers.add(new Container(5, ContainerType.OFFICE));
-        containers.add(new Container(5, ContainerType.SANITARY));
-        containers.add(new Container(5, ContainerType.SANITARY));
-        containers.add(new Container(5, ContainerType.SANITARY));
-        containers.add(new Container(5, ContainerType.SANITARY));
+        List<ContainerEntity> containerEntities = new ArrayList<>();
+        containerEntities.add(new ContainerEntity(5, ContainerType.EMPLOYEE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.EMPLOYEE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.STORAGE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.OFFICE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.OFFICE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.OFFICE));
+        containerEntities.add(new ContainerEntity(5, ContainerType.SANITARY));
+        containerEntities.add(new ContainerEntity(5, ContainerType.SANITARY));
+        containerEntities.add(new ContainerEntity(5, ContainerType.SANITARY));
+        containerEntities.add(new ContainerEntity(5, ContainerType.SANITARY));
 
         // when
-        ContainerResponse result = containerResponseMapper.mapToResponse(containers);
+        ContainerResponse result = containerResponseMapper.mapToResponse(containerEntities);
 
         // then
         assertEquals(4, result.getContainers().size());
