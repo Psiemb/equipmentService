@@ -4,7 +4,7 @@ import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.Objects;
 
-public class CheckContainerResponse {
+public class CheckContainerByTypeResponse {
 
     private long id;
     private int workerCapacity;
@@ -37,8 +37,8 @@ public class CheckContainerResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CheckContainerResponse)) return false;
-        CheckContainerResponse that = (CheckContainerResponse) o;
+        if (!(o instanceof CheckContainerByTypeResponse)) return false;
+        CheckContainerByTypeResponse that = (CheckContainerByTypeResponse) o;
         return id == that.id &&
                 workerCapacity == that.workerCapacity &&
                 type == that.type;

@@ -2,7 +2,7 @@ package pl.firmaBudo.equipBase.api.endpoint.availability.maper;
 
 import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerResponse;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerByTypeResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
 import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
 import pl.firmaBudo.equipBase.dao.entity.ContainerType;
@@ -31,19 +31,19 @@ public class ContainerResponseMapper {
         return new ContainerResponse(availabilityContainers);
     }
 
-    public List<CheckContainerResponse> mapToResponseByType(List<ContainerEntity> byType) {
-        return byType.stream()
-                .map(this::mapTyCheckContainer)
+    public List<CheckContainerByTypeResponse> mapToResponseByType(List<ContainerEntity> containerEntities) {
+        return containerEntities.stream()
+                .map(this::mapToCheckContainer)
                 .collect(Collectors.toList());
     }
 
-    private CheckContainerResponse mapTyCheckContainer(ContainerEntity containerEntity) {
-        CheckContainerResponse checkContainerResponse = new CheckContainerResponse();
-        checkContainerResponse.setId(containerEntity.getId());
-        checkContainerResponse.setType(containerEntity.getType());
-        checkContainerResponse.setWorkerCapacity(containerEntity.getWorkerCapacity());
+    private CheckContainerByTypeResponse mapToCheckContainer(ContainerEntity containerEntity) {
+        CheckContainerByTypeResponse checkContainerByTypeResponse = new CheckContainerByTypeResponse();
+        checkContainerByTypeResponse.setId(containerEntity.getId());
+        checkContainerByTypeResponse.setType(containerEntity.getType());
+        checkContainerByTypeResponse.setWorkerCapacity(containerEntity.getWorkerCapacity());
 
-        return checkContainerResponse;
+        return checkContainerByTypeResponse;
     }
 }
  

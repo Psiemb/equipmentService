@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ContainerResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByTypeRequest;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerResponse;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerByTypeResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.PowerToolDataBase;
-import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
 
 import java.util.List;
 
@@ -37,12 +37,19 @@ public class AvailabilityController {
         return ResponseEntity.ok(response);
     }
 
+    //To jest zle podejscie do tworzenie Response z naszego endpointa. Ponieważ, nie ma możliwości rozszerzenia odpowiedzi w przyszłości.
+    @GetMapping("/v1/availability/container/2")
+    public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
+        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
+        return ResponseEntity.ok(response.getContainers());
+    }
+
     // Potrzeba - klient chce wyświetlić wszystkie kontenery danego typu
     // 2 -> Czy klient odpyta nasz serwis z jednym typem kontenera czy z wieloma?  -> Klient uderza z jednym typem
 
     @PostMapping("/v1/availability/container/type")
-    public List<CheckContainerResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
-        return containerResponseMapper.mapToResponseByType(containerDataBase.getByType(request.getType()));
+    public List<CheckContainerByTypeResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
+        return containerResponseMapper.mapToResponseByType(containerDataBase.getByType(request.getType().name()));
     }
 
 //    @PostMapping("/v1/availability/container/check")

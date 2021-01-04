@@ -1,18 +1,16 @@
 package pl.firmaBudo.equipBase.api.endpoint.availability.request;
 
-import pl.firmaBudo.equipBase.dao.entity.ContainerType;
-
 import java.util.Objects;
 
 public class CheckContainerByTypeRequest {
 
-    private ContainerType type;
+    private RequestContainerType type;
 
-    public ContainerType getType() {
+    public RequestContainerType getType() {
         return type;
     }
 
-    public void setType(ContainerType type) {
+    public void setType(RequestContainerType type) {
         this.type = type;
     }
 

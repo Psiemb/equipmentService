@@ -19,9 +19,9 @@ public class ContainerDataBase {
                 .collect(Collectors.toList());
     }
 
-    public List<ContainerEntity> getByType(ContainerType type) {
+    public List<ContainerEntity> getByType(String type) {
         return containerEntities.stream()
-                .filter(container -> container.getType().equals(type))
+                .filter(container -> container.getType().name().equals(type))
                 .filter(container -> !container.isRented())
                 .collect(Collectors.toList());
     }
