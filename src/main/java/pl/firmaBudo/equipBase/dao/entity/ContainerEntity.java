@@ -9,6 +9,7 @@ public class ContainerEntity {
     private long id;
     private int workerCapacity;
     private ContainerType type;
+    private double dailyCost;
     private boolean rented;
 
     //private tajemniczePOle
@@ -25,6 +26,7 @@ public class ContainerEntity {
         this.id = idCount++;
         this.workerCapacity = workerCapacity;
         this.type = type;
+        this.dailyCost = Math.random()*100;
     }
 
     public ContainerEntity(int workerCapacity, ContainerType type, boolean rented) {
@@ -32,6 +34,15 @@ public class ContainerEntity {
         this.workerCapacity = workerCapacity;
         this.type = type;
         this.rented = rented;
+        this.dailyCost = Math.random()*100;
+    }
+
+    public static long getIdCount() {
+        return idCount;
+    }
+
+    public static void setIdCount(long idCount) {
+        ContainerEntity.idCount = idCount;
     }
 
     public long getId() {
@@ -61,6 +72,15 @@ public class ContainerEntity {
         return this;
     }
 
+    public double getDailyCost() {
+        return dailyCost;
+    }
+
+    public ContainerEntity setDailyCost(double dailyCost) {
+        this.dailyCost = dailyCost;
+        return this;
+    }
+
     public boolean isRented() {
         return rented;
     }
@@ -74,21 +94,22 @@ public class ContainerEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContainerEntity containerEntity = (ContainerEntity) o;
-        return id == containerEntity.id && workerCapacity == containerEntity.workerCapacity && rented == containerEntity.rented && type == containerEntity.type;
+        ContainerEntity that = (ContainerEntity) o;
+        return id == that.id && workerCapacity == that.workerCapacity && Double.compare(that.dailyCost, dailyCost) == 0 && rented == that.rented && type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, workerCapacity, type, rented);
+        return Objects.hash(id, workerCapacity, type, dailyCost, rented);
     }
 
     @Override
     public String toString() {
-        return "Container{" +
+        return "ContainerEntity{" +
                 "id=" + id +
                 ", workerCapacity=" + workerCapacity +
                 ", type=" + type +
+                ", dailyCost=" + dailyCost +
                 ", rented=" + rented +
                 '}';
     }
