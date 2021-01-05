@@ -20,9 +20,9 @@ public class ExcavatorDataBase {
 
     }
 
-    public List<ExcavatorEntity> getByType(ExcavatorType type) {
+    public List<ExcavatorEntity> getByType(String type) {
         return excavatorEntities.stream()
-                .filter(excavator -> excavator.getType().equals(type))
+                .filter(excavator -> excavator.getType().name().equals(type))
                 .filter(excavator -> !excavator.isRented())
                 .collect(Collectors.toList());
 

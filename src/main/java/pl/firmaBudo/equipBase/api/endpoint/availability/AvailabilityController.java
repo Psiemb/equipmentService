@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ContainerResponseMapper;
+import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ExcavatorResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByTypeRequest;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckExcavatorByTypeRequest;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.*;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
+import pl.firmaBudo.equipBase.dao.dataBase.ExcavatorDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.PowerToolDataBase;
 
 import java.util.List;
@@ -21,6 +23,11 @@ public class AvailabilityController {
     private PowerToolDataBase powerToolDataBase;
     @Autowired
     private ContainerResponseMapper containerResponseMapper;
+    @Autowired
+    private ExcavatorDataBase excavatorDataBase;
+    @Autowired
+    private ExcavatorResponseMapper excavatorResponseMapper;
+
 
     // 1.Potrzeba klienta
     // 2. zastanawiamy się nad request / response. Nad wplywem na inne apliacke, na architekture
@@ -34,8 +41,9 @@ public class AvailabilityController {
     }
 
     @GetMapping("/v1/availability/excavator")
-    public void  availabilityExcavator(){
-        System.out.println("Excavator Resw");
+    public ResponseEntity<ExcavatorResponse>  availabilityExcavator(){
+        ExcavatorResponse response = excavatorResponseMapper.mapToResponse(excavatorDataBase.getAll());
+        return ResponseEntity.ok(response);
 
     }
 
@@ -56,8 +64,9 @@ public class AvailabilityController {
     }
 
     @PostMapping("/v1/availability/excavator/type")
-    public void checkExcavatorByType(@RequestBody CheckExcavatorByTypeRequest request){
-        System.out.println("Mój Reqest");
+    public List<CheckExcavatorByTypeResponse> checkExcavatorByType(@RequestBody CheckExcavatorByTypeRequest request){
+        return excavatorResponseMapper.mapToResponseByType(excavatorDataBase.getByType(request.getType().name()));
+
     }
 //    @PostMapping("/v1/availability/container/check")
 //    public ResponseEntity<List<ContainerEntity>> checkContainer(@RequestBody CheckContainerRequest containerQuery) {

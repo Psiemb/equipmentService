@@ -14,27 +14,24 @@ public class CheckExcavatorByTypeResponse {
         return id;
     }
 
-    public CheckExcavatorByTypeResponse setId(long id) {
+    public void setId(long id) {
         this.id = id;
-        return this;
     }
 
     public long getBucket() {
         return bucket;
     }
 
-    public CheckExcavatorByTypeResponse setBucket(long bucket) {
+    public void setBucket(long bucket) {
         this.bucket = bucket;
-        return this;
     }
 
     public ExcavatorType getType() {
         return type;
     }
 
-    public CheckExcavatorByTypeResponse setType(ExcavatorType type) {
+    public void setType(ExcavatorType type) {
         this.type = type;
-        return this;
     }
 
     @Override
