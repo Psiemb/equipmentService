@@ -66,8 +66,8 @@ public class AvailabilityController {
 //        return ResponseEntity.ok(new PowerToolResponse());
 //    }
 
-//    @PostMapping("/v1/availability/container/byMaxCost")
-//    public List<CheckContainerResponse> checkContainerByCostResponses(@RequestBody CheckContainerByCostRequest request){
-//        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByMaxCost(request.getDailyCost()));
-//    }
+    @PostMapping("/v1/availability/container/byMaxCost")
+    public List<CheckContainerResponse> checkContainerByCostResponses(@RequestBody CheckContainerByCostRequest request){
+        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByMaxCost(request.getDailyCost()));
+    }
 }
