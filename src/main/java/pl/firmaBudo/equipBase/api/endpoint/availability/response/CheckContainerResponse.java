@@ -4,11 +4,12 @@ import pl.firmaBudo.equipBase.dao.entity.ContainerType;
 
 import java.util.Objects;
 
-public class CheckContainerByTypeResponse {
+public class CheckContainerResponse {
 
     private long id;
     private int workerCapacity;
     private ContainerType type;
+    private double dailyCost = 20;
 
     public long getId() {
         return id;
@@ -34,11 +35,19 @@ public class CheckContainerByTypeResponse {
         this.type = type;
     }
 
+    public double getDailyCost() {
+        return dailyCost;
+    }
+
+    public void setDailyCost(double dailyCost) {
+        this.dailyCost = dailyCost;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CheckContainerByTypeResponse)) return false;
-        CheckContainerByTypeResponse that = (CheckContainerByTypeResponse) o;
+        if (!(o instanceof CheckContainerResponse)) return false;
+        CheckContainerResponse that = (CheckContainerResponse) o;
         return id == that.id &&
                 workerCapacity == that.workerCapacity &&
                 type == that.type;

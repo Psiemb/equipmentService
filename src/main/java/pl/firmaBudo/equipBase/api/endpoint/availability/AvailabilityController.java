@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ContainerResponseMapper;
+import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByCostRequest;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByTypeRequest;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerByTypeResponse;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.PowerToolDataBase;
@@ -48,8 +49,8 @@ public class AvailabilityController {
     // 2 -> Czy klient odpyta nasz serwis z jednym typem kontenera czy z wieloma?  -> Klient uderza z jednym typem
 
     @PostMapping("/v1/availability/container/type")
-    public List<CheckContainerByTypeResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
-        return containerResponseMapper.mapToResponseByType(containerDataBase.getByType(request.getType().name()));
+    public List<CheckContainerResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
+        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByType(request.getType().name()));
     }
 
 //    @PostMapping("/v1/availability/container/check")
@@ -63,5 +64,10 @@ public class AvailabilityController {
 //    @GetMapping("/v1/availability/powerTool")
 //    public ResponseEntity<List<PowerToolResponse>> getAllPowerTools() {
 //        return ResponseEntity.ok(new PowerToolResponse());
+//    }
+
+//    @PostMapping("/v1/availability/container/byMaxCost")
+//    public List<CheckContainerResponse> checkContainerByCostResponses(@RequestBody CheckContainerByCostRequest request){
+//        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByMaxCost(request.getDailyCost()));
 //    }
 }

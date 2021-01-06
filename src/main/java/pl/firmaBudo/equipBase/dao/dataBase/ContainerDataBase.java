@@ -26,6 +26,13 @@ public class ContainerDataBase {
                 .collect(Collectors.toList());
     }
 
+    public List<ContainerEntity> getByMaxCost(double dailyMaxCost){
+        return containerEntities.stream()
+                .filter(container -> container.getDailyCost() < dailyMaxCost)
+                .filter(container -> !container.isRented())
+                .collect(Collectors.toList());
+    }
+
     private List<ContainerEntity> initialization() {
         List<ContainerEntity> result = new ArrayList<>();
         result.add(new ContainerEntity(15, ContainerType.EMPLOYEE));
