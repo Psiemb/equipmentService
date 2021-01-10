@@ -2,16 +2,14 @@ package pl.firmaBudo.equipBase.api.endpoint.availability;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ContainerResponseMapper;
+import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ExcavatorResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByTypeRequest;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerByTypeResponse;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
+import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckExcavatorByTypeRequest;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.*;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
+import pl.firmaBudo.equipBase.dao.dataBase.ExcavatorDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.PowerToolDataBase;
 
 import java.util.List;
@@ -25,6 +23,11 @@ public class AvailabilityController {
     private PowerToolDataBase powerToolDataBase;
     @Autowired
     private ContainerResponseMapper containerResponseMapper;
+    @Autowired
+    private ExcavatorDataBase excavatorDataBase;
+    @Autowired
+    private ExcavatorResponseMapper excavatorResponseMapper;
+
 
     // 1.Potrzeba klienta
     // 2. zastanawiamy się nad request / response. Nad wplywem na inne apliacke, na architekture
@@ -37,12 +40,20 @@ public class AvailabilityController {
         return ResponseEntity.ok(response);
     }
 
-    //To jest zle podejscie do tworzenie Response z naszego endpointa. Ponieważ, nie ma możliwości rozszerzenia odpowiedzi w przyszłości.
-    @GetMapping("/v1/availability/container/2")
-    public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
-        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
-        return ResponseEntity.ok(response.getContainers());
+    @GetMapping("/v1/availability/excavator")
+    public ResponseEntity<ExcavatorResponse>  availabilityExcavator(){
+        ExcavatorResponse response = excavatorResponseMapper.mapToResponse(excavatorDataBase.getAll());
+        return ResponseEntity.ok(response);
+
     }
+
+
+    //To jest zle podejscie do tworzenie Response z naszego endpointa. Ponieważ, nie ma możliwości rozszerzenia odpowiedzi w przyszłości.
+//    @GetMapping("/v1/availability/container/2")
+//    public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
+//        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
+//        return ResponseEntity.ok(response.getContainers());
+//    }
 
     // Potrzeba - klient chce wyświetlić wszystkie kontenery danego typu
     // 2 -> Czy klient odpyta nasz serwis z jednym typem kontenera czy z wieloma?  -> Klient uderza z jednym typem
@@ -52,6 +63,11 @@ public class AvailabilityController {
         return containerResponseMapper.mapToResponseByType(containerDataBase.getByType(request.getType().name()));
     }
 
+    @PostMapping("/v1/availability/excavator/type")
+    public List<CheckExcavatorByTypeResponse> checkExcavatorByType(@RequestBody CheckExcavatorByTypeRequest request){
+        return excavatorResponseMapper.mapToResponseByType(excavatorDataBase.getByType(request.getType().name()));
+
+    }
 //    @PostMapping("/v1/availability/container/check")
 //    public ResponseEntity<List<ContainerEntity>> checkContainer(@RequestBody CheckContainerRequest containerQuery) {
 //        if(CheckContainerType.TYPE.equals(containerQuery.getCheckBy())){
