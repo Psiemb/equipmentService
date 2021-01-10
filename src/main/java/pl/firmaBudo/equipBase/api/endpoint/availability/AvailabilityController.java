@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ContainerResponseMapper;
-import pl.firmaBudo.equipBase.api.endpoint.availability.maper.ExcavatorResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckContainerByTypeRequest;
-import pl.firmaBudo.equipBase.api.endpoint.availability.request.CheckExcavatorByTypeRequest;
-import pl.firmaBudo.equipBase.api.endpoint.availability.response.*;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.AvailabilityContainer;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.CheckContainerByTypeResponse;
+import pl.firmaBudo.equipBase.api.endpoint.availability.response.ContainerResponse;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.ExcavatorDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.PowerToolDataBase;
@@ -49,18 +49,18 @@ public class AvailabilityController {
 
 
     //To jest zle podejscie do tworzenie Response z naszego endpointa. Ponieważ, nie ma możliwości rozszerzenia odpowiedzi w przyszłości.
-//    @GetMapping("/v1/availability/container/2")
-//    public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
-//        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
-//        return ResponseEntity.ok(response.getContainers());
-//    }
+    @GetMapping("/v1/availability/container/2")
+    public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
+        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
+        return ResponseEntity.ok(response.getContainers());
+    }
 
     // Potrzeba - klient chce wyświetlić wszystkie kontenery danego typu
     // 2 -> Czy klient odpyta nasz serwis z jednym typem kontenera czy z wieloma?  -> Klient uderza z jednym typem
 
     @PostMapping("/v1/availability/container/type")
-    public List<CheckContainerByTypeResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
-        return containerResponseMapper.mapToResponseByType(containerDataBase.getByType(request.getType().name()));
+    public List<CheckContainerResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
+        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByType(request.getType().name()));
     }
 
     @PostMapping("/v1/availability/excavator/type")
@@ -80,4 +80,9 @@ public class AvailabilityController {
 //    public ResponseEntity<List<PowerToolResponse>> getAllPowerTools() {
 //        return ResponseEntity.ok(new PowerToolResponse());
 //    }
+
+    @PostMapping("/v1/availability/container/byMaxCost")
+    public List<CheckContainerResponse> checkContainerByCostResponses(@RequestBody CheckContainerByCostRequest request){
+        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByMaxCost(request.getDailyCost()));
+    }
 }
