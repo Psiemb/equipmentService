@@ -25,10 +25,6 @@ public class AvailabilityController {
     private ContainerDataBase containerDataBase;
     @Autowired
     private ContainerResponseMapper containerResponseMapper;
-    @Autowired
-    private ExcavatorDataBase excavatorDataBase;
-    @Autowired
-    private ExcavatorResponseMapper excavatorResponseMapper;
 
 
     // 1.Potrzeba klienta
