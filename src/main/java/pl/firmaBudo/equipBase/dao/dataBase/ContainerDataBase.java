@@ -1,8 +1,8 @@
 package pl.firmaBudo.equipBase.dao.dataBase;
 
 import org.springframework.stereotype.Component;
-import pl.firmaBudo.equipBase.dao.entity.ContainerEntity;
-import pl.firmaBudo.equipBase.dao.entity.ContainerType;
+import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
+import pl.firmaBudo.equipBase.dao.entity.container.ContainerType;
 
 import java.util.ArrayList;
 import java.util.List;
