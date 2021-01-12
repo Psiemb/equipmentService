@@ -7,6 +7,9 @@ public class ContainerEntity {
 
     private static long idCount;
     private long id;
+    // historia wynajmu
+    // historia naprawy
+    // historia stastow
     private int workerCapacity;
     private ContainerType type;
     private double dailyCost;

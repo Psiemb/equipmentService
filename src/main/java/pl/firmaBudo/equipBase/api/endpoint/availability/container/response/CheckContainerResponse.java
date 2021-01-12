@@ -10,6 +10,7 @@ public class CheckContainerResponse {
     private int workerCapacity;
     private ContainerType type;
     private double dailyCost;
+    private String wizytowke = "23984293842";
 
     public long getId() {
         return id;

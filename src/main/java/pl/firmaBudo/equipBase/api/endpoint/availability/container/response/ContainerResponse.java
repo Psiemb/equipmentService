@@ -6,6 +6,7 @@ import java.util.Objects;
 public class ContainerResponse {
 
     private List<AvailabilityContainer> containers;
+    private String wizytowka = "872873283728";
 
     public ContainerResponse(List<AvailabilityContainer> availabilityContainerList) {
         this.containers = availabilityContainerList;
