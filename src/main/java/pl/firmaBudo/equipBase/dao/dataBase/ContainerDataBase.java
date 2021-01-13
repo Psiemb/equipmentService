@@ -14,6 +14,16 @@ public class ContainerDataBase {
 
     private List<ContainerEntity> containerEntities = initialization();
 
+    public ContainerEntity getByParamters(int workerCapacity, double dailyCost) {
+    return containerEntities.stream()
+            .filter(container -> container.getWorkerCapacity() < workerCapacity)
+            .filter(container -> container.getDailyCost() < dailyCost)
+            .findFirst()
+            .orElse(null);
+
+    }
+
+
     public ContainerEntity getById(long id){
         return containerEntities.stream()
                 .filter(container -> container.getId() == id)

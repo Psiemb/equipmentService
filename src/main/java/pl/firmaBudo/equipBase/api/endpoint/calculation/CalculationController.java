@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.firmaBudo.equipBase.api.endpoint.calculation.mapper.CalculationResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.calculation.request.CalculationRequest;
+import pl.firmaBudo.equipBase.api.endpoint.calculation.request.CalculationRequestParameters;
 import pl.firmaBudo.equipBase.api.endpoint.calculation.response.CalculationResponse;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
@@ -38,7 +39,7 @@ public class CalculationController {
 //
 //    }
     @PostMapping("/v1/calculation")
-    public ResponseEntity<CalculationResponse> kierownikBudowy(@RequestBody CalculationRequest request) {
+    public ResponseEntity<CalculationResponse> rentCost(@RequestBody CalculationRequest request) {
 
         ContainerEntity container = containerDataBase.getById(request.getId());
         CalculationResponse result = calculationResponseMapper.mapToResponse(container, request.getDays());
@@ -50,8 +51,14 @@ public class CalculationController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("v1/calculation/capacity")
+    public ResponseEntity<CalculationResponse> rentCostByParamteters(@RequestBody CalculationRequestParameters request) {
+        ContainerEntity container = containerDataBase.getByParamters(request.getWorkerCapacity(), request.getDailyCost());
+        CalculationResponse result = calculationResponseMapper.mapToResponse(container, request.getDays());
 
+        return ResponseEntity.ok(result);
 
+    }
 
 
 }

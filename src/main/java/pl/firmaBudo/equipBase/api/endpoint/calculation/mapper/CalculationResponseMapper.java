@@ -20,4 +20,5 @@ public class CalculationResponseMapper {
         return calculationResponse;
 
     }
+
 }
