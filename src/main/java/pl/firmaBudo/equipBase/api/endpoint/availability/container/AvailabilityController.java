@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.mapper.ContainerResponseMapper;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.request.CheckContainerByCostRequest;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.request.CheckContainerByTypeRequest;
+import pl.firmaBudo.equipBase.api.endpoint.availability.container.request.RequestContainerType;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.AvailabilityContainer;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.CheckContainerResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.ContainerResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.excavator.mapper.ExcavatorResponseMapper;
 import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
 import pl.firmaBudo.equipBase.dao.dataBase.ExcavatorDataBase;
+import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
 
 import java.util.List;
 
@@ -25,10 +27,6 @@ public class AvailabilityController {
     private ContainerDataBase containerDataBase;
     @Autowired
     private ContainerResponseMapper containerResponseMapper;
-    @Autowired
-    private ExcavatorDataBase excavatorDataBase;
-    @Autowired
-    private ExcavatorResponseMapper excavatorResponseMapper;
 
 
     // 1.Potrzeba klienta
@@ -53,8 +51,12 @@ public class AvailabilityController {
     // 2 -> Czy klient odpyta nasz serwis z jednym typem kontenera czy z wieloma?  -> Klient uderza z jednym typem
 
     @PostMapping("/v1/availability/container/type")
-    public List<CheckContainerResponse> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
-        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByType(request.getType().name()));
+//    public ResponseEntity<List<CheckContainerResponse>> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
+    public ResponseEntity<List<ContainerEntity>> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
+        RequestContainerType requestedContainersType = request.getType();
+        List<ContainerEntity> allAvailableContainersWithGivenType = containerDataBase.getByType(requestedContainersType.name());
+        return ResponseEntity.ok(allAvailableContainersWithGivenType);
+//        return ResponseEntity.ok(containerResponseMapper.mapToResponseByParameter(allAvailableContainersWithGivenType));
     }
 
     @PostMapping("/v1/availability/container/byMaxCost")

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerType;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +13,23 @@ import java.util.stream.Collectors;
 public class ContainerDataBase {
 
     private List<ContainerEntity> containerEntities = initialization();
+
+    public ContainerEntity getByParamters(int workerCapacity, double dailyCost) {
+    return containerEntities.stream()
+            .filter(container -> container.getWorkerCapacity() < workerCapacity)
+            .filter(container -> container.getDailyCost() < dailyCost)
+            .findFirst()
+            .orElse(null);
+
+    }
+
+
+    public ContainerEntity getById(long id){
+        return containerEntities.stream()
+                .filter(container -> container.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
 
     public List<ContainerEntity> getAll() {
         return containerEntities.stream()
