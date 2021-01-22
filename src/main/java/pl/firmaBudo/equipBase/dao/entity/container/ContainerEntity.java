@@ -1,11 +1,16 @@
 package pl.firmaBudo.equipBase.dao.entity.container;
 
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "containerx")
 public class ContainerEntity {
 
     private static long idCount;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     // historia wynajmu
     // historia naprawy
