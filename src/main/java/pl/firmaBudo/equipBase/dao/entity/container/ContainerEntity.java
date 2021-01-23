@@ -38,6 +38,9 @@ public class ContainerEntity {
         this.dailyCost = Math.random() * 100;
     }
 
+    public ContainerEntity() {
+    }
+
     public static long getIdCount() {
         return idCount;
     }

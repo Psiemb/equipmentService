@@ -24,14 +24,14 @@ public class ContainerController {
         this.containerRepository = containerRepository;
     }
 
-    @GetMapping(value = "/containerx", params = {"!sort", "!page", "!size"})
+    @GetMapping(value = "/container", params = {"!sort", "!page", "!size"})
     ResponseEntity<List<ContainerEntity>> readAllContainers() {
         logger.warn("Exposing all the tasks!");
         return ResponseEntity.ok(containerRepository.findAll());
     }
 
     @PutMapping("/container/{id}")
-    ResponseEntity<?> updateContainer(@PathVariable int id, @RequestBody @Valid ContainerEntity toUpadate) {
+    ResponseEntity<?> updateContainer(@PathVariable long id, @RequestBody @Valid ContainerEntity toUpadate) {
         if (containerRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
 //            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
