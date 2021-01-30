@@ -17,14 +17,24 @@ class MatematykaTest {
     @Test
     public  void  checkSquareAreaPositivesOrZero(){
         //given
-        Matematyka matematyka = new Matematyka();
+
+        // nie musisz sam tworzyć instancji obiektu, który testujesz w każdej metodzie testującej. Robi to za Ciebie JUnit w metodzie 'setUp' -> w 13 linii.
+        // świeży i gotowy obiekt do testowania wskazywany jest przez zmienną referencyjna 'matematyka' z linii 10;
+//        Matematyka matematyka = new Matematyka();
         int a =2;
 
         //when
-        int pole = matematyka.poleKwadratu(a);
+        // czyli tutaj wystarczy zrobić:
+        int result = matematyka.poleKwadratu(a);
+//        int pole = matematyka.poleKwadratu(a);
 
         //then
-        assertEquals(4,pole);
+//        assertEquals(4,pole);
+
+        //Ja preferuję, by obiket, wartośc która jest zwracana w 'when' nazywać 'result'
+        assertEquals(4,result);
+
+        //TODO: do poprawy w reszcie metod testujacych
 
     }
     @Test
