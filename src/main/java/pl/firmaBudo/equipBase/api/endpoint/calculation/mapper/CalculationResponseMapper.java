@@ -11,7 +11,7 @@ import java.util.Objects;
 public class CalculationResponseMapper {
 
 //    @Autowired
-//    private CalculationMaster calculationMaster;
+//    private PromotionMapper promotionMapper;
 
     public CalculationResponse mapToResponse(ContainerEntity containerEntity, int days) {
         CalculationResponse calculationResponse = new CalculationResponse();
@@ -22,6 +22,7 @@ public class CalculationResponseMapper {
         }
         else {
             double totalCost = containerEntity.getDailyCost() * days;
+//            double totalCost = promotionMapper.calculatePromo(containerEntity) * days;
             calculationResponse.setFullCost(totalCost);
 
         }
