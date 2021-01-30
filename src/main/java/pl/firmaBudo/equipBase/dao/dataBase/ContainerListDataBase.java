@@ -23,7 +23,6 @@ public class ContainerListDataBase implements Dao {
                 .orElse(null);
     }
 
-
     public ContainerEntity getById(long id) {
         return containerEntities.stream()
                 .filter(container -> container.getId() == id)

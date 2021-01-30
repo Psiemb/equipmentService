@@ -1,11 +1,8 @@
 package pl.firmaBudo.equipBase.api.endpoint.calculation.request;
 
-import pl.firmaBudo.equipBase.dao.entity.container.ContainerType;
-
 import java.util.Objects;
 
 public class CalculationRequest {
-
 
     private int days;
     private long id;

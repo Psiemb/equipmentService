@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import pl.firmaBudo.equipBase.api.endpoint.calculation.response.CalculationResponse;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
 
+import java.util.Objects;
+
 @Component
 public class CalculationResponseMapper {
 
@@ -13,12 +15,17 @@ public class CalculationResponseMapper {
 
     public CalculationResponse mapToResponse(ContainerEntity containerEntity, int days) {
         CalculationResponse calculationResponse = new CalculationResponse();
-//      double totalCost =  calculationMaster.getTotalCost(....);
-        double totalCost = containerEntity.getDailyCost() * days;
-        calculationResponse.setFullCost(totalCost);
+
+        if(days < 0 || Objects.isNull(containerEntity) || containerEntity.getDailyCost() < 0) {
+            calculationResponse.setFullCost(0);
+
+        }
+        else {
+            double totalCost = containerEntity.getDailyCost() * days;
+            calculationResponse.setFullCost(totalCost);
+
+        }
 
         return calculationResponse;
-
     }
-
 }
