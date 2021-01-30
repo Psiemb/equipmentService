@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.firmaBudo.equipBase.api.endpoint.calculation2.request2.CalculationRequest2;
 import pl.firmaBudo.equipBase.api.endpoint.calculation2.response2.CalculationResponse2;
-import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
+import pl.firmaBudo.equipBase.dao.dataBase.ContainerListDataBase;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
 
 @RestController
 public class CaluculationController2 {
 
     @Autowired
-    private ContainerDataBase containerDataBase;
+    private ContainerListDataBase containerListDataBase;
 
     @PostMapping("/v1/calculation2")
     public CalculationResponse2 test2(@RequestBody CalculationRequest2 request2) {
-        ContainerEntity byId2 = containerDataBase.getById(request2.getId());
+        ContainerEntity byId2 = containerListDataBase.getById(request2.getId());
 
         CalculationResponse2 result2 = new CalculationResponse2();
         result2.setFullCost(byId2.getDailyCost() * request2.getDays());

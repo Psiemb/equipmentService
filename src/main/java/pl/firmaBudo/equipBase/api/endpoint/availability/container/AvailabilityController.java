@@ -10,9 +10,7 @@ import pl.firmaBudo.equipBase.api.endpoint.availability.container.request.Reques
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.AvailabilityContainer;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.CheckContainerResponse;
 import pl.firmaBudo.equipBase.api.endpoint.availability.container.response.ContainerResponse;
-import pl.firmaBudo.equipBase.api.endpoint.availability.excavator.mapper.ExcavatorResponseMapper;
-import pl.firmaBudo.equipBase.dao.dataBase.ContainerDataBase;
-import pl.firmaBudo.equipBase.dao.dataBase.ExcavatorDataBase;
+import pl.firmaBudo.equipBase.dao.dataBase.ContainerListDataBase;
 import pl.firmaBudo.equipBase.dao.entity.container.ContainerEntity;
 
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.List;
 public class AvailabilityController {
 
     @Autowired
-    private ContainerDataBase containerDataBase;
+    private ContainerListDataBase containerListDataBase;
     @Autowired
     private ContainerResponseMapper containerResponseMapper;
 
@@ -33,14 +31,14 @@ public class AvailabilityController {
 
     @GetMapping("/v1/availability/container")
     public ResponseEntity<ContainerResponse> availabilityContainer() {
-        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
+        ContainerResponse response = containerResponseMapper.mapToResponse(containerListDataBase.getAll());
         return ResponseEntity.ok(response);
     }
 
     //To jest zle podejscie do tworzenie Response z naszego endpointa. Ponieważ, nie ma możliwości rozszerzenia odpowiedzi w przyszłości.
     @GetMapping("/v1/availability/container/2")
     public ResponseEntity<List<AvailabilityContainer>> availabilityContainer2() {
-        ContainerResponse response = containerResponseMapper.mapToResponse(containerDataBase.getAll());
+        ContainerResponse response = containerResponseMapper.mapToResponse(containerListDataBase.getAll());
         return ResponseEntity.ok(response.getContainers());
     }
 
@@ -51,13 +49,13 @@ public class AvailabilityController {
 //    public ResponseEntity<List<CheckContainerResponse>> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
     public ResponseEntity<List<ContainerEntity>> checkContainerByType(@RequestBody CheckContainerByTypeRequest request) {
         RequestContainerType requestedContainersType = request.getType();
-        List<ContainerEntity> allAvailableContainersWithGivenType = containerDataBase.getByType(requestedContainersType.name());
+        List<ContainerEntity> allAvailableContainersWithGivenType = containerListDataBase.getByType(requestedContainersType.name());
         return ResponseEntity.ok(allAvailableContainersWithGivenType);
 //        return ResponseEntity.ok(containerResponseMapper.mapToResponseByParameter(allAvailableContainersWithGivenType));
     }
 
     @PostMapping("/v1/availability/container/byMaxCost")
     public List<CheckContainerResponse> checkContainerByCostResponses(@RequestBody CheckContainerByCostRequest request) {
-        return containerResponseMapper.mapToResponseByParameter(containerDataBase.getByMaxCost(request.getDailyCost()));
+        return containerResponseMapper.mapToResponseByParameter(containerListDataBase.getByMaxCost(request.getDailyCost()));
     }
 }
