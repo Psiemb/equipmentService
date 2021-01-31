@@ -2,10 +2,13 @@ package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+//TODO: ctrl + alt + L
+//TODO: ctrl + alt + O  - to musi być u Ciebie nawyk
 import pl.firmaBudo.equipBase.unitTesty.odPawla.mapperStatusow.WorkPossibilityStatusMapper;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +31,7 @@ class ResponseMapperTest {
                 new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.READY_TO_WORK));
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
+        //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
         internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
@@ -46,6 +50,7 @@ class ResponseMapperTest {
                 new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.READY_TO_WORK));
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
+        //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
         internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
@@ -66,6 +71,7 @@ class ResponseMapperTest {
                 new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.ON_VACATION);
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
+        //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
         internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
@@ -87,6 +93,7 @@ class ResponseMapperTest {
         new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.ON_VACATION);
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
+        //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
         internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
@@ -101,9 +108,13 @@ class ResponseMapperTest {
     @Test
     public void shouldReturnPawelBecauseNameIsPawel() {
         //given
-        List<HistoryWorkStatus> historyWorkStatuses
-                = Arrays.asList(new HistoryWorkStatus(LocalDate.now(), StatusWork.ILL),
-                new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.READY_TO_WORK));
+        //TODO: jak w tym tescie sprawdzasz tylko mapowanie 'name', to możesz zasetować pustą listę
+        List<HistoryWorkStatus> historyWorkStatuses = Collections.emptyList();
+        //TODO: i dzięki temu zobaczymy, że gdy lista HistoryWorkStatusow jest pusta (ale nie nullowa!), to i tak leci błąd -
+
+//        List<HistoryWorkStatus> historyWorkStatuses
+//                = Arrays.asList(new HistoryWorkStatus(LocalDate.now(), StatusWork.ILL),
+//                new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.READY_TO_WORK));
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
         internalModelWorker.setName("Pawel");
