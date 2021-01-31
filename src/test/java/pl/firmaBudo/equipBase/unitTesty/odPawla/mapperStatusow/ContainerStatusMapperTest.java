@@ -3,122 +3,110 @@ package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperStatusow;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContainerStatusMapperTest {
 
     private ContainerStatusMapper containerStatusMapper;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         this.containerStatusMapper = new ContainerStatusMapper();
     }
 
     @Test
-    void checkStatusForReasdyToRent(){
+    void checkStatusForNull() {
+        //given
+        InternalContainerStatus readyToUse = null;
 
+        //when
+        ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
+
+        //then
+        assertEquals(ContainerRentStatus.UNKNOWN, status);
+    }
+
+    @Test
+    void checkStatusForReasdyToRent() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.READY_TO_USE;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.AVAILABLE, status);
-
     }
-    @Test
-    void checkStatusForTransportToBase(){
 
+    @Test
+    void checkStatusForTransportToBase() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.TRANSPORT_TO_BASE;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.AVAILABLE, status);
-
     }
-    @Test
-    void checkStatusForRent(){
 
+    @Test
+    void checkStatusForRent() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.RENT;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.NOT_AVAILABLE, status);
-
     }
-    @Test
-    void checkStatusForTransportToClient(){
 
+    @Test
+    void checkStatusForTransportToClient() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.TRANSPORT_TO_CLIENT;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.NOT_AVAILABLE, status);
-
     }
-    @Test
-    void checkStatusForInRepair(){
 
+    @Test
+    void checkStatusForInRepair() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.IN_REPAIR;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.TEMPORARY_DECOMMISSION, status);
-
     }
-    @Test
-    void checkStatusForDemage(){
 
+    @Test
+    void checkStatusForDemage() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.DAMAGE;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.TEMPORARY_DECOMMISSION, status);
-
     }
-    @Test
-    void checkStatusForOnService(){
 
+    @Test
+    void checkStatusForOnService() {
         //given
         InternalContainerStatus readyToUse = InternalContainerStatus.ON_SERVICE;
 
-
         //when
         ContainerRentStatus status = containerStatusMapper.toContainerStatus(readyToUse);
 
         //then
-
         assertEquals(ContainerRentStatus.TEMPORARY_DECOMMISSION, status);
-
     }
-
-
 }
