@@ -46,6 +46,19 @@ public class Matematyka {
         return obwod;
     }
 
+//    public int obwodTrapezuRownoramiennego(KartkaZDanymi kartkaZDanymi) {
+//        int obwod;
+//        if (kartkaZDanymi.getA() >= 0 & kartkaZDanymi.getB(0) >= 0 & kartkaZDanymi.getC() >= 0) {
+//            if (kartkaZDanymi.getA() > b)
+//                obwod = (((kartkaZDanymi.getA() - b)) * ((kartkaZDanymi.getA() - b)) + kartkaZDanymi.getC() * kartkaZDanymi.getC());
+//            else
+//                obwod = (((b - a)) * ((b - a)) + kartkaZDanymi.getC() * kartkaZDanymi.getC());
+//        }
+//        else
+//            obwod = 0;
+//        return obwod;
+//    }
+
     public int poleKola(int r) {
         int pole;
         if (r >= 0) {

@@ -1,6 +1,7 @@
-package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow;
+package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow.przyklad1;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ResponseMapper {
 
@@ -14,6 +15,9 @@ public class ResponseMapper {
     }
 
     private boolean toWasIll(List<HistoryWorkStatus> historyWorkStatusList) {
+        if(Objects.nonNull(historyWorkStatusList) || historyWorkStatusList.isEmpty()){
+            return false;
+        }
         return historyWorkStatusList.stream()
                 .map(HistoryWorkStatus::getStatusWork)
                 .anyMatch(StatusWork.ILL::equals);
@@ -21,7 +25,11 @@ public class ResponseMapper {
     }
 
     private boolean toReadyToWork(List<HistoryWorkStatus> historyWorkStatusList) {
-        HistoryWorkStatus newestWorkStatus = historyWorkStatusList.get(0);
-        return newestWorkStatus.getStatusWork().equals(StatusWork.READY_TO_WORK);
+        if (Objects.isNull(historyWorkStatusList) || historyWorkStatusList.isEmpty()) {
+            return false;
+        }
+
+//        return historyWorkStatusList.get(0).getStatusWork().equals(StatusWork.READY_TO_WORK);
+        return StatusWork.READY_TO_WORK.equals(historyWorkStatusList.get(0).getStatusWork());
     }
 }

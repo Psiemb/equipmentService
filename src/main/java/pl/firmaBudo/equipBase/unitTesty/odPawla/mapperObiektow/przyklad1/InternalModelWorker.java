@@ -1,4 +1,4 @@
-package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow;
+package pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow.przyklad1;
 
 import java.util.List;
 

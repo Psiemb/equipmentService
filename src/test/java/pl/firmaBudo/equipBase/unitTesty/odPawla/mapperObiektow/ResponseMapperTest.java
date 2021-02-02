@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 //TODO: ctrl + alt + L
 //TODO: ctrl + alt + O  - to musi być u Ciebie nawyk
-import pl.firmaBudo.equipBase.unitTesty.odPawla.mapperStatusow.WorkPossibilityStatusMapper;
+import pl.firmaBudo.equipBase.unitTesty.odPawla.mapperObiektow.przyklad1.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ class ResponseMapperTest {
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
         //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
-        internalModelWorker.setName("Pawel");
+//        internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
         //when
@@ -51,7 +51,7 @@ class ResponseMapperTest {
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
         //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
-        internalModelWorker.setName("Pawel");
+//        internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
         //when
@@ -72,7 +72,7 @@ class ResponseMapperTest {
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
         //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
-        internalModelWorker.setName("Pawel");
+//        internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
         //when
@@ -94,7 +94,7 @@ class ResponseMapperTest {
 
         InternalModelWorker internalModelWorker = new InternalModelWorker();
         //TODO: jak nie sprawdzasz imienia to nie musisz ustawiać
-        internalModelWorker.setName("Pawel");
+//        internalModelWorker.setName("Pawel");
         internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
 
         //when
