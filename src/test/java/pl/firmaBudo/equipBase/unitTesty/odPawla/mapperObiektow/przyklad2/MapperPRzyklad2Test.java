@@ -11,8 +11,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapperPRzyklad2Test {
-    private MapperPRzyklad2 mapperPRzyklad2;
 
+    private MapperPRzyklad2 mapperPRzyklad2;
 
     @BeforeEach
     void setUp(){
@@ -22,21 +22,42 @@ class MapperPRzyklad2Test {
     @Test
     public void test() {
         //given
-        ModelWewnRozliczen modelWewnRozliczen = new ModelWewnRozliczen();
-//        List<HistoryWorkStatus> historyWorkStatuses
-//                = Arrays.asList(new HistoryWorkStatus(LocalDate.now(), StatusWork.ILL),
-//                new HistoryWorkStatus(LocalDate.now().minusDays(2), StatusWork.READY_TO_WORK));
-//
-//        InternalModelWorker internalModelWorker = new InternalModelWorker();
+        InternalCost internalCost = new InternalCost();
 
-//        internalModelWorker.setName("Pawel");
-//        internalModelWorker.setHistoryWorkStatusList(historyWorkStatuses);
+        ModelWewnRozliczen modelWewnRozliczen = new ModelWewnRozliczen();
+        modelWewnRozliczen.setInternalCost(internalCost);
 
         //when
-//        WorkerResponse result = responseMapper.mapToResponse(internalModelWorker);
+        RaportDoInwestora result = mapperPRzyklad2.map(modelWewnRozliczen);
 
         //then
-//        assertTrue(result.isWasIll());
+        assertEquals(0, result.getTotalCost());
+
+    }
+
+    @Test
+    public void testNull() {
+        //given
+        ModelWewnRozliczen modelWewnRozliczen = new ModelWewnRozliczen();
+        modelWewnRozliczen.setInternalCost(null);
+
+        //when
+        RaportDoInwestora result = mapperPRzyklad2.map(modelWewnRozliczen);
+
+        //then
+        assertNull(result);
+    }
+
+    @Test
+    public void testNull2() {
+        //given
+        ModelWewnRozliczen modelWewnRozliczen = null;
+
+        //when
+        RaportDoInwestora result = mapperPRzyklad2.map(modelWewnRozliczen);
+
+        //then
+        assertNull(result);
     }
 
 }

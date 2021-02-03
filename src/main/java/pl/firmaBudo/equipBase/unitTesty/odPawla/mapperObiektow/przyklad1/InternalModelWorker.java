@@ -6,6 +6,7 @@ public class InternalModelWorker {
 
     private String name;
     private List<HistoryWorkStatus> historyWorkStatusList;
+    private double salary;
 
     public String getName() {
         return name;
@@ -21,6 +22,14 @@ public class InternalModelWorker {
 
     public void setHistoryWorkStatusList(List<HistoryWorkStatus> historyWorkStatusList) {
         this.historyWorkStatusList = historyWorkStatusList;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     @Override
