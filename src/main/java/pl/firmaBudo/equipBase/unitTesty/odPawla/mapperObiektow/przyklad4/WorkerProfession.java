@@ -4,6 +4,9 @@ public class WorkerProfession {
     private Profession profession;
     private int avargeNumberOfWorkedDays;
 
+    public WorkerProfession() {
+    }
+
     public WorkerProfession(Profession profession, int avargeNumberOfWorkedDays) {
         this.profession = profession;
         this.avargeNumberOfWorkedDays = avargeNumberOfWorkedDays;

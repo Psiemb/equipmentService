@@ -18,7 +18,7 @@ class MapperOutsideResponseTest {
     }
 
     @Test
-    public void test() {
+    public void shouldReturnIsCarpeterTrueBecauseThereIsCarpenterProfession() {
         //given
         List<WorkerProfession> workerProfessions
                 = Arrays.asList(new WorkerProfession(Profession.CARPENTER, 20),
@@ -26,10 +26,28 @@ class MapperOutsideResponseTest {
 
         InternalWorker internalWorker = new InternalWorker();
         internalWorker.setWorkerProfessionList(workerProfessions);
+//        internalWorker.setHired(true);
         //when
         OutsideResponse result = mapperOutsideResponse.map((internalWorker));
 
         //then
-        assertFalse(result.isCarpenter());
+        assertTrue(result.isCarpenter());
+    }
+
+    @Test
+    public void shouldReturnHiredBecauseSetHiredTrue() {
+        //given
+        List<WorkerProfession> workerProfessions
+                = Arrays.asList(new WorkerProfession(Profession.CARPENTER, 20),
+                new WorkerProfession(Profession.GENERAL_CONSTRUCTION, 40), new WorkerProfession(Profession.REBAR_FIXER, 60));
+
+        InternalWorker internalWorker = new InternalWorker();
+        internalWorker.setWorkerProfessionList(workerProfessions);
+        internalWorker.setHired(true);
+        //when
+        OutsideResponse result = mapperOutsideResponse.map((internalWorker));
+
+        //then
+        assertEquals(120, result.getTotalNumberOfWorkedDays());
     }
 }

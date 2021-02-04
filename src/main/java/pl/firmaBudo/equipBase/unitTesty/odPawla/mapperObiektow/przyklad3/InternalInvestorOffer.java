@@ -29,4 +29,13 @@ public class InternalInvestorOffer {
     public void setSupervisionCosts(int supervisionCosts) {
         this.supervisionCosts = supervisionCosts;
     }
+
+    @Override
+    public String toString() {
+        return "InternalInvestorOffer{" +
+                "statusOffer=" + statusOffer +
+                ", directCosts=" + directCosts +
+                ", supervisionCosts=" + supervisionCosts +
+                '}';
+    }
 }
